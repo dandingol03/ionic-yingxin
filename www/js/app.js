@@ -62,7 +62,7 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
     $urlRouterProvider.otherwise('/login');
 
   })
-  
+
 
   .factory('Insurances', function () {
     return [
