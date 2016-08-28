@@ -52,6 +52,17 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
       templateUrl:'views/tabs/tabs.html'
     });
 
+    $stateProvider.state('tabs.dashboard',{
+      url:'/dashboard',
+      views:{
+        'dashboard-tab':{
+          controller:'dashboardController',
+          templateUrl:'views/dashboard/dashboard.html'
+        }
+      }
+    });
+
+
 
     $stateProvider.state('login',{
       url:'/login',
@@ -59,7 +70,7 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
       templateUrl:'views/login/login.html'
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('tabs/dashboard');
 
   })
 
