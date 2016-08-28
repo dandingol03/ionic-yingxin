@@ -7,10 +7,7 @@
 angular.module('app')
     .controller('loginController',function($scope,$state,$ionicLoading,$http,$cordovaProgress){
 
-
-
-
-      $scope.login = function(){
+    $scope.login = function(){
           $http({
               method:"post",
               params:{
@@ -32,7 +29,6 @@ angular.module('app')
                   duration:'2000'
               });
           })
-
 
       }
 
@@ -78,5 +74,13 @@ angular.module('app')
             })
         }
 
-    })
+    $scope.update_op='option1';
+    $scope.update_options=function(){
+      console.log('...');
+      console.log('...');
+      console.log('...');
+    }
+
+
+  })
 

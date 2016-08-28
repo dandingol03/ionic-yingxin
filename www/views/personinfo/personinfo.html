@@ -1,10 +1,14 @@
-<ion-view view-title="个人基本信息">
+
+<ion-view view-title="{{title}}">
+
   <ion-nav-bar class="bar-stable" align-title="center" >
+
     <ion-nav-buttons side="left">
       <button class="button button-icon button-clear bar_arr" ng-click="go_back()">
         <i class="ion-chevron-left"></i>
       </button>
     </ion-nav-buttons>
+
     <ion-nav-buttons side="right">
       <button class="button button-icon button-clear" ng-click="goto('/#/tabs/dashboard')">
         <i class="ion-ios-search-strong"></i>
@@ -16,7 +20,8 @@
 
     <div class="item_desc">
       <div class="prop_over">
-        <h4>学生基本信息</h4>
+        <h4>{{title}}</h4>
+
         <ion-list>
           <ion-item ng-repeat="item in items">
             <div class="row">
@@ -27,6 +32,7 @@
         </ion-list>
 
       </div>
-  </div>
-    </ion-content>
+
+    </div>
+  </ion-content>
 </ion-view>
