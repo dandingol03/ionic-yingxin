@@ -62,6 +62,13 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
       }
     });
 
+    $stateProvider.state('personInfo',{
+      url:'/personInfo',
+      controller: 'personInfoController',
+      templateUrl:'views/personInfo/personInfo.html'
+
+    });
+
 
 
     $stateProvider.state('login',{
