@@ -41,7 +41,7 @@
                       <input type="text" ng-model="item.val"/>
                     </label>
 
-                    <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px">
+                    <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
                       <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.val" ng-options="type for type in item.vals">
                       </select>
                     </label>
@@ -71,7 +71,7 @@
             <ion-list>
               <ion-item ng-repeat="item in info_2">
                 <div class="row">
-                  <div class="col">
+                  <div class="col" ng-if="item.type!='selects'">
                     <p ng-if="item.type=='input'" style="margin-top:2%">
                       <i class="ion-record"></i>{{item.property}}
                     </p>
@@ -85,15 +85,46 @@
                       <i class="ion-record"></i>{{item.property}}
                     </p>
                   </div>
+                  <div class="col-20" ng-if="item.type=='selects'">
+                    <p style="margin-top:20%">
+                      <i class="ion-record"></i>{{item.property}}
+                    </p>
+                  </div>
                   <div class="col">
 
                     <label class="item item-input" ng-if="item.type=='input'" style="background: #f4f4f4;padding-left: 20px">
                       <input type="text" ng-model="item.val"/>
                     </label>
 
-                    <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px">
+                    <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
                       <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.val" ng-options="type for type in item.vals">
                       </select>
+                    </label>
+
+                    <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width: 120px;display: inline-block">
+                       <select
+                         style="padding-left:0px;right:auto;min-width:120px"
+                         ng-model="address[item.store].province"
+                         ng-options="add.province for add in addresses"
+                         ng-change="address_change()"></select>
+                    </label>
+
+                    <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width:120px;display: inline-block">
+                      <select
+                        style="padding-left:0px;right:auto;min-width:120px"
+                        ng-model="address[item.store].city"
+                        ng-options="item.city for item in address[item.store].province.sub"
+                        ng-change="address_change()"></select>
+
+                    </label>
+
+                    <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width:120px;display: inline-block">
+                      <select
+                        style="padding-left:0px;right:auto;min-width:120px"
+                        ng-model="address[item.store].county"
+                        ng-options="item.county for item in address[item.store].city.sub"
+                        ng-change="address_change()"></select>
+
                     </label>
 
                     <p ng-if="item.type=='span'">

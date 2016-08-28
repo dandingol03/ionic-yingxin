@@ -76,6 +76,12 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
 
     });
 
+    $stateProvider.state('schedule',{
+      url:'/schedule',
+      controller: 'scheduleController',
+      templateUrl:'views/schedule/schedule.html'
+
+    });
 
     $stateProvider.state('login',{
       url:'/login',
