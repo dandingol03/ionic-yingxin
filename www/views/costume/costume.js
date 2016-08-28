@@ -1,5 +1,8 @@
+/**
+ * Created by danding on 16/8/28.
+ */
 angular.module('app')
-  .controller('personInfoController',function($scope,$state,$http){
+  .controller('costumeController',function($scope,$state,$http){
 
     $scope.title='个人基本信息';
 
