@@ -1,4 +1,10 @@
 {
   "name": "ionic-yingxin",
-  "app_id": ""
+  "app_id": "",
+   "proxies": [
+            {
+              "path":"/proxy/node",
+              "proxyUrl":"http://localhost:8080/sduyingxin/"
+            }
+          ]
 }
