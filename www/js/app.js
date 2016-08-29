@@ -45,6 +45,7 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
 
+    
 
     $stateProvider.state('tabs',{
       url:'/tabs',

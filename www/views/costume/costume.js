@@ -4,19 +4,75 @@
 angular.module('app')
   .controller('costumeController',function($scope,$state,$http){
 
-    $scope.title='个人基本信息';
+    $scope.title='军训服装';
+    $scope.costumeType = "2号三型";
+    $scope.Ttype = "S";
 
-    $scope.items= [
-      {id:"1",property:"名称",num:"太平洋寿险"},
-      {id:"2",property:"保额",num:"400$"},
-      {id:"3",property:"保费",num:"500$"},
-      {id:"4",property:"保险期间",num:"保至70周岁"},
-      {id:"5",property:"缴费期间",num:"2周年"},
-      {id:"6",property:"首年保费",num:"30000$"}
-    ];
+    $scope.ad=new Object();
+
+    $scope.dressSelect=function (item) {
+
+      var costumeType = document.getElementById("tops");
+      var Ttype = document.getElementById("weight");
+      var index = costumeType.selectedIndex;
+      var index_t = Ttype.selectedIndex;
+      var val = costumeType.options[index].value;
+      if (val == 9) {
+        Ttype.disabled == true;
+      }
+      var val_t = Ttype.options[index_t].value;
+      var sum = val + val_t;
+      switch (sum) {
+        case "10":
+          $scope.costumeType = "2号三型";
+          $scope.Ttype = "S";
+          break;
+        case "11":
+          $scope.costumeType = "2号五型";
+          $scope.Ttype = "M";
+          break;
+        case "20":
+          $scope.costumeType = "3号三型";
+          $scope.Ttype = "L";
+          break;
+        case "21":
+          $scope.costumeType = "3号五型";
+          $scope.Ttype = "XL";
+          break;
+        case "30":
+          $scope.costumeType = "4号三型";
+          $scope.Ttype = "XXL";
+          break;
+        case "31":
+          $scope.costumeType = "4号五型";
+          $scope.Ttype = "XXXL";
+          break;
+        case "40":
+          $scope.costumeType = "5号三型";
+          $scope.Ttype = "XXXXL";
+          break;
+        case "41":
+          $scope.costumeType = "5号五型";
+          $scope.Ttype = "XXXXXL";
+          break;
+        case "5":
+          $scope.costumeType = "6号六型";
+          $scope.Ttype = "特体加肥加大";
+          break;
+        default :
+          break;
+      }
+
+    }
+
+
+
+
+
 
     $scope.go_back=function(){
       window.history.back();
     }
+
 
   });
