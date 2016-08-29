@@ -14,7 +14,7 @@ angular.module('app')
       {id:"8",property:"政治面貌",val:'中国共产党预备党员',vals:['请选择','中国共产党预备党员','中国共产党党员','群众'],type:'select'}
     ];
 
-<<<<<<< HEAD
+
     //{id:'3',property:'',val:'',arr:[],type:'selects'},及联数组列
 
     $scope.addresses=[
@@ -54,10 +54,10 @@ angular.module('app')
       console.log('...');
       console.log('...');
     };
-=======
+
     $scope.go_back=function() {
     }
->>>>>>> f0d8c5bcc61d6c425b77c79fb3f64dee619ff0c3
+
 
     $scope.info_2=[
       {id:"1",property:"婚否",val:"否",vals:['是','否'],type:'radio'},
