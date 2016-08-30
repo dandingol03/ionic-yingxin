@@ -2,26 +2,35 @@
  * Created by danding on 16/8/28.
  */
 angular.module('app')
-  .controller('costumeController',function($scope,$state,$http){
+  .controller('costumeController',function($scope,$state,$http,$ionicLoading){
 
     $scope.title='军训服装';
     $scope.costumeType = "2号三型";
     $scope.Ttype = "S";
+    $scope.shoes=null;
 
     $scope.ad=new Object();
 
+    $scope.upload = function() {
+      $http({
+        method: "post",
+        url: "/proxy/node/tranningCloth/student_training_cloth_mobile.do"
+      }).success(function (response) {
+        var data = response;
+      }).error(function (err) {
+        $ionicLoading.show({
+          template: 'connect the server timeout',
+          duration: '2000'
+        });
+      })
+    }
+    $scope.shoeSelect=function() {
+      $scope.shoes=$scope.ad.shoes
+    }
+
     $scope.dressSelect=function (item) {
 
-      var costumeType = document.getElementById("tops");
-      var Ttype = document.getElementById("weight");
-      var index = costumeType.selectedIndex;
-      var index_t = Ttype.selectedIndex;
-      var val = costumeType.options[index].value;
-      if (val == 9) {
-        Ttype.disabled == true;
-      }
-      var val_t = Ttype.options[index_t].value;
-      var sum = val + val_t;
+      var sum = $scope.ad.tops+$scope.ad.weight;
       switch (sum) {
         case "10":
           $scope.costumeType = "2号三型";
@@ -55,7 +64,11 @@ angular.module('app')
           $scope.costumeType = "5号五型";
           $scope.Ttype = "XXXXXL";
           break;
-        case "5":
+        case "50":
+          $scope.costumeType = "6号六型";
+          $scope.Ttype = "特体加肥加大";
+          break;
+        case "51":
           $scope.costumeType = "6号六型";
           $scope.Ttype = "特体加肥加大";
           break;

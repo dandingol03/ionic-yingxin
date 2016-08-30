@@ -62,11 +62,46 @@
           </ion-item>
         </ion-list>
 
-        <div >
-          <button class="button button-block button-positive">确认提交</button>
-        </div>
-
       </div>
+      <div class="prop_over">
+        <h4>军训鞋码</h4>
+        <ion-list>
+          <ion-item >
+            <div class="row">
+              <div class=" col">
+                <label class="item item-input item-select">
+                  <div class="input-label"><p><i class="ion-record"></i>鞋码</p></div>
+                  <select id="shoesType" ng-change="shoeSelect()"   ng-model="ad.shoes">
+                    <option value="22.5">35</option>
+                    <option value="23">36</option>
+                    <option value="23.5">37</option>
+                    <option value="24">38</option>
+                    <option value="24.5">39</option>
+                    <option value="25">40</option>
+                    <option value="25.5">41</option>
+                    <option value="26">42</option>
+                    <option value="26.5">43</option>
+                    <option value="27">44</option>
+                    <option value="27.5">45</option>
+                    <option value="28">46</option>
+                  </select>
+                </label></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p><i class="ion-record"></i>鞋长（cm）</p>
+              </div>
+              <div class="col">
+                <p>{{shoes}}</p>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+    <div>
+      <button class="button button-block button-positive" ng-click="upload()">确认提交</button>
     </div>
 
     </ion-content>
