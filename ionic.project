@@ -1,4 +1,10 @@
 {
-  "name": "ionic-yingxin",
-  "app_id": ""
+  "name": "ionic-secure",
+  "app_id": "com.ionicframework.starter",
+   "proxies": [
+          {
+            "path":"/proxy/node",
+            "proxyUrl":"http://192.168.1.122:8080/sduyingxin/"
+          }
+        ]
 }

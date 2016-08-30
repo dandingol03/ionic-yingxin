@@ -1,4 +1,4 @@
-angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
+angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highcharts-ng'])
 
 
   .run(function($ionicPlatform,$location,$rootScope,$ionicHistory) {
@@ -45,7 +45,7 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
 
-    
+
 
     $stateProvider.state('tabs',{
       url:'/tabs',
@@ -84,13 +84,20 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
 
     });
 
+    $stateProvider.state('statistics',{
+      url:'/statistics',
+      controller: 'statisticsController',
+      templateUrl:'views/statistics/statistics.html'
+
+    });
+
     $stateProvider.state('login',{
       url:'/login',
       controller: 'loginController',
       templateUrl:'views/login/login.html'
     });
 
-    $urlRouterProvider.otherwise('tabs/dashboard');
+    $urlRouterProvider.otherwise('login');
 
   })
 

@@ -14,7 +14,7 @@ angular.module('app')
                   loginName:$scope.user.username,
                   password:$scope.user.password
               },
-              url:"/proxy/node/login"
+              url:"/proxy/node/getUserLoginJSONObjectMobile.do"
           }).success(function(response){
             var re = response.re;
             if(re==1)
@@ -51,7 +51,7 @@ angular.module('app')
                     username:$scope.user.username,
                     password:$scope.user.password
                 },
-                url:"http://202.194.14.106:3000/login",
+                url:"/proxy/node/getUserLoginJSONObjectMobile.do",
                headers: {
                 'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -66,7 +66,7 @@ angular.module('app')
 
               }
             }).error(function(err){
-                alert(err.toSource());
+                alert(err.toString());
                 $ionicLoading.show({
                     template:'connect the server timeout',
                     duration:'2000'
