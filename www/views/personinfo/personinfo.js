@@ -103,11 +103,14 @@ angular.module('app')
         }
       }
 
+      //省列表
+      if(response.pros!==undefined&&response.pros!==null)
+          $scope.pros=response.pros;
 
       $scope.info_2=[
         {id:"1",property:"婚否",val:'maritalStatus',vals:$scope.maritalStatuses,type:'radio'},
         {id:"2",property:"出生日期",val:"1990-10-15",type:'span'},
-        {id:'3',property:'籍贯',arr:$scope.addresses,store:'regions',
+        {id:'3',property:'籍贯',arr:$scope.pros,store:'regions',
           type:'selects'},
         {id:"4",property:"国别",model:$scope.nation,
           vals:$scope.nationList,
