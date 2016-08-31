@@ -43,36 +43,36 @@ angular.module('app')
         });
     };
 
-    $scope.login = function(){
-      $http({
-                method:"post",
-                params:{
-                    grant_type: 'password',
-                    username:$scope.user.username,
-                    password:$scope.user.password
-                },
-                url:"/proxy/node/getUserLoginJSONObjectMobile.do",
-               headers: {
-                'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
-                'Content-Type': 'application/x-www-form-urlencoded'
-               },
-
-            }).success(function(response){
-                var re=response.re;
-              if(re==1)
-              {
-                $state.go('tabs.coverage');
-              }else{
-
-              }
-            }).error(function(err){
-                alert(err.toString());
-                $ionicLoading.show({
-                    template:'connect the server timeout',
-                    duration:'2000'
-                });
-            })
-        }
+    //$scope.login = function(){
+    //  $http({
+    //            method:"post",
+    //            params:{
+    //                grant_type: 'password',
+    //                username:$scope.user.username,
+    //                password:$scope.user.password
+    //            },
+    //            url:"/proxy/node/getUserLoginJSONObjectMobile.do",
+    //           headers: {
+    //            'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
+    //            'Content-Type': 'application/x-www-form-urlencoded'
+    //           },
+    //
+    //        }).success(function(response){
+    //            var re=response.re;
+    //          if(re==1)
+    //          {
+    //            $state.go('tabs.coverage');
+    //          }else{
+    //
+    //          }
+    //        }).error(function(err){
+    //            alert(err.toString());
+    //            $ionicLoading.show({
+    //                template:'connect the server timeout',
+    //                duration:'2000'
+    //            });
+    //        })
+    //    }
 
     $scope.update_op='option1';
     $scope.update_options=function(){
