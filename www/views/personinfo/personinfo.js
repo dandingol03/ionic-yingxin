@@ -41,10 +41,6 @@ angular.module('app')
           }
       }
 
-      //婚否
-      if(response.maritalStatus!==undefined&&response.maritalStatus!==null)
-        $scope.maritalStatus=response.maritalStatus;
-
       if(response.politicsList!==undefined&&response.politicsList!==null)
       {
         $scope.politicsList=response.politicsList;
@@ -66,6 +62,9 @@ angular.module('app')
         });
       }
 
+      $scope.genderCodes=[{label:'男',value:'01'},{label:'女',value:'02'}];
+      $scope.user.gender=$scope.genderCodes[0].value;
+
 
       $scope.info_1= [
         {id:"1",property:"姓名",val:$scope.user.perName,
@@ -77,13 +76,53 @@ angular.module('app')
           type:'select',callback:'cardtype_func'},
         {id:"4",property:"证件号码",val:$scope.user.perIdCard,type:'span'},
         {id:"5",property:"学号",val:$scope.user.perNum,type:'span'},
-        {id:"6",property:"性别",val:$scope.user.genderCode,vals:['男','女'],type:'radio'},
+        {id:"6",property:"性别",val:'gender',vals:$scope.genderCodes,
+          type:'radio'},
         {id:"7",property:"民族",model:$scope.people,
           vals: $scope.peopleList,type:'select'},
         {id:"8",property:"政治面貌",model:$scope.politics,
           vals:$scope.politicsList
           ,type:'select'}
       ];
+
+      $scope.maritalStatuses=[{label:'否',value:0},{label:'是',value:1}];
+      if(response.maritalStatus!==undefined&&response.maritalStatus!==null)
+      {
+        $scope.user.maritalStatus=response.maritalStatus;
+      }
+
+      if(response.nationList!==undefined&&response.nationList!==null)
+      {
+        $scope.nationList=response.nationList;
+        if(response.nation!==undefined&&response.nation!==null)
+        {
+            $scope.nationList.map(function(nation,i) {
+              if(response.nation.label==nation.label)
+                $scope.nation=nation;
+            })
+        }
+      }
+
+
+      $scope.info_2=[
+        {id:"1",property:"婚否",val:'maritalStatus',vals:$scope.maritalStatuses,type:'radio'},
+        {id:"2",property:"出生日期",val:"1990-10-15",type:'span'},
+        {id:'3',property:'籍贯',arr:$scope.addresses,store:'regions',
+          type:'selects'},
+        {id:"4",property:"国别",model:$scope.nation,
+          vals:$scope.nationList,
+          type:'select'},
+        {id:"5",property:"通讯地址",val:"交通局路政管理站",type:'input'},
+        {id:"6",property:"邮编",val:'111111',type:'input'},
+        {id:"7",property:"家庭地址",arr:$scope.addresses,store:'familyAddress',
+          type:'selects'},
+        {id:"8",property:"所在单位",arr:$scope.addresses,store:'unitAddress',
+          type:'selects'},
+        {id:"9",property:"家庭邮编",val:'111111',type:'input'},
+        {id:"10",property:"家庭电话",val:'111111',type:'input'}
+      ];
+
+
     } else {
     }
 
@@ -133,28 +172,15 @@ angular.module('app')
 
     $scope.address_change=function(item){
       var address=$scope.ob;
-      console.log('...');
-      console.log('...');
-      console.log('...');
+
     };
 
     $scope.go_back=function() {
     };
 
+    $scope.radio_change=function(item){
 
-    $scope.info_2=[
-      {id:"1",property:"婚否",val:"否",vals:['是','否'],type:'radio'},
-      {id:"2",property:"出生日期",val:"1990-10-15",type:'span'},
-      {id:'3',property:'籍贯',arr:$scope.addresses,type:'selects',store:'regions'},
-      {id:"4",property:"国别",val:'中国',
-        vals:[{label:'请选择',value:'请选择'},{label:'阿富汉',value:'阿富汉'},{label:'意大利',value:'意大利'},{label:'中国',value:'中国'}],type:'select'},
-      {id:"5",property:"通讯地址",val:"交通局路政管理站",type:'input'},
-      {id:"6",property:"邮编",val:'111111',type:'input'},
-      {id:"7",property:"家庭地址",arr:$scope.addresses,type:'selects',store:'familyAddress'},
-      {id:"8",property:"所在单位",arr:$scope.addresses,type:'selects',store:'unitAddress'},
-      {id:"9",property:"家庭邮编",val:'111111',type:'input'},
-      {id:"10",property:"家庭电话",val:'111111',type:'input'}
-    ];
+    }
 
     $scope.type_change=function()
     {

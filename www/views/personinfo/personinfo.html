@@ -67,13 +67,14 @@
 
                     <p ng-if="item.type=='radio'">
                       <ion-radio ng-repeat="choice in item.vals"
-                                 name="{{item.property}}"
-                                 ng-model="item.val"
-                                 ng-value="item.val"
+                                 ng-model="user[item.val]"
+                                 ng-value="choice.value"
+                                 ng-change="radio_change(choice)"
                                  style="border:0px;width:33%;display: inline-block">
-                        {{choice}}
+                        {{choice.label}}
                       </ion-radio>
                     </p>
+
                   </div>
                 </div>
               </ion-item>
@@ -112,10 +113,11 @@
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
-                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.val" ng-options="type for type in item.vals">
+                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.model" ng-options="type.label for type in item.vals" ng-change="type_change()">
                       </select>
                     </label>
 
+                    <!-- control type == selects -->
                     <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width: 120px;display: inline-block">
                        <select
                          style="padding-left:0px;right:auto;min-width:120px"
@@ -148,11 +150,11 @@
 
                     <p ng-if="item.type=='radio'">
                       <ion-radio ng-repeat="choice in item.vals"
-                                 name="{{item.property}}"
-                                 ng-model="item.val"
-                                 ng-value="item.val"
+                                 ng-model="user[item.val]"
+                                 ng-value="choice.value"
+                                 ng-change="radio_change(choice)"
                                  style="border:0px;width:33%;display: inline-block">
-                        {{choice}}
+                        {{choice.label}}
                       </ion-radio>
                     </p>
                   </div>
