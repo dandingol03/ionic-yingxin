@@ -1,4 +1,4 @@
-angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
+angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highcharts-ng'])
 
 
   .run(function($ionicPlatform,$location,$rootScope,$ionicHistory) {
@@ -81,6 +81,13 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker'])
       url:'/schedule',
       controller: 'scheduleController',
       templateUrl:'views/schedule/schedule.html'
+
+    });
+
+    $stateProvider.state('statistics',{
+      url:'/statistics',
+      controller: 'statisticsController',
+      templateUrl:'views/statistics/statistics.html'
 
     });
 

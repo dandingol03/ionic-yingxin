@@ -14,7 +14,9 @@ angular.module('app')
                   loginName:$scope.user.username,
                   password:$scope.user.password
               },
+
               url:"/proxy/node/tranningCloth/mobileLogin.do"
+
           }).success(function(response){
             var re = response.re;
             if(re==1)
@@ -52,6 +54,7 @@ angular.module('app')
         });
     };
 
+
     //$scope.login = function(){
     //  $http({
     //            method:"post",
@@ -82,6 +85,7 @@ angular.module('app')
     //            });
     //        })
     //    }
+
 
     $scope.update_op='option1';
     $scope.update_options=function(){

@@ -209,7 +209,7 @@
 }
 
 .login_page{
-  background:url(../img/2.jpg)no-repeat;
+  background:url('../img/2.jpg')no-repeat;
   background-size:100% 100%;
   text-align:center;
   margin:0
