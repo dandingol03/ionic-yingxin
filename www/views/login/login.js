@@ -37,7 +37,6 @@ angular.module('app')
                   duration:'2000'
               });
           })
-
       }
 
 
@@ -45,7 +44,7 @@ angular.module('app')
 
     $scope.user=new Object();
     $scope.get_preference=function(){
-      $cordovaPreferences.fetch('name')
+      $cordovaProgress.fetch('name')
         .success(function(value) {
           alert("Success: " + value);
         })
@@ -53,6 +52,7 @@ angular.module('app')
           alert("Error: " + error);
         });
     };
+
 
 
     //$scope.login = function(){
@@ -63,7 +63,7 @@ angular.module('app')
     //                username:$scope.user.username,
     //                password:$scope.user.password
     //            },
-    //            url:"/proxy/node/sduyingxinGetUserLoginJSONObjectMobile.do",
+
     //           headers: {
     //            'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
     //            'Content-Type': 'application/x-www-form-urlencoded'
@@ -78,8 +78,7 @@ angular.module('app')
     //
     //          }
     //        }).error(function(err){
-    //            alert(err.toSource());
-    //            $ionicLoading.show({
+
     //                template:'connect the server timeout',
     //                duration:'2000'
     //            });
@@ -95,5 +94,27 @@ angular.module('app')
     }
 
 
+
+    $scope.cities=[
+      {name:"合肥",dw:2},
+      {name:"北京",dw:3},
+      {name:"上海",dw:4},
+      {name:"舒城",dw:5},
+      {name:"纽约",dw:6},
+      {name:"络上几",dw:7}
+    ];
+
+    $scope.city=$scope.cities[1];
+
+    //for(var i in $scope.cities){
+    //  if($scope.cities[i].dw==4){//将d是4的城市设为选中项.
+    //    $scope.city=$scope.cities[i];
+    //    break;
+    //  }
+    //}
+    $scope.menu_change=function(city){
+
+      $scope.city=city;
+    }
   })
 
