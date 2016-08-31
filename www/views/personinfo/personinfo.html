@@ -57,7 +57,7 @@
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
-                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.val" ng-options="type for type in item.vals">
+                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.model" ng-options="type.label for type in item.vals" ng-change="type_change()">
                       </select>
                     </label>
 
@@ -161,7 +161,6 @@
             </ion-list>
           </ion-slide>
         </ion-slide-box>
-
 
 
         <button class="button button-full button-positive" style="margin-top:40px" ng-click="submit()">

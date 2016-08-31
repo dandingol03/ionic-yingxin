@@ -1,18 +1,101 @@
 angular.module('app')
-  .controller('personInfoController',function($scope,$state,$http){
+  .controller('personInfoController',function($scope,$state,$http,$rootScope,$ionicLoading) {
 
-    $scope.title='个人基本信息';
+    $scope.title = '个人基本信息';
+    $scope.user={};
+    $scope.cardtype={};
+    $scope.peopleId={};
+    $scope.politicsCode={};
 
-    $scope.info_1= [
-      {id:"1",property:"姓名",val:"枭",type:'span'},
-      {id:"2",property:"英文姓名",val:"micheal jorden",type:'input'},
-      {id:"3",property:"证件类型",val:'身份证',vals:['请选择','身份证','银行卡'],type:'select'},
-      {id:"4",property:"证件号码",val:"460104199910150019",type:'span'},
-      {id:"5",property:"学号",val:"201513655",type:'span'},
-      {id:"6",property:"性别",val:'男',vals:['男','女'],type:'radio'},
-      {id:"7",property:"民族",val:'汉族',vals:['请选择','汉族','蒙古族'],type:'select'},
-      {id:"8",property:"政治面貌",val:'中国共产党预备党员',vals:['请选择','中国共产党预备党员','中国共产党党员','群众'],type:'select'}
-    ];
+  $http({
+    method: "post",
+    params: {
+      personId:$rootScope.user.personId
+    },
+    url: "/proxy/node/baseInfoManage/yxStuBaseInfoUpdateInitMobile.do"
+  }).success(function (response) {
+    var re = response.re;
+    if (re == 1) {
+      //TODO:enter the dashboard panel
+      //$state.go('tabs.dashboard');
+      $scope.user= {
+        perName:response.perName,
+        perNum:response.perNum,
+        perIdCard:response.perIdCard,
+        peopleId:response.peopleId,
+        politicsCode:response.politicsCode,
+        genderCode:response.genderCode,
+        perEnglishName:response.perEnglishName,
+        cardType:response.cardType
+      };
+
+      if(response.peopleList!==undefined&&response.peopleList!==null)
+      {
+          $scope.peopleList=response.peopleList;
+          if(response.peopleId!==undefined&&response.peopleId!==null)
+          {
+            $scope.peopleList.map(function(people,i) {
+              if(people.value==response.peopleId)
+                $scope.people=$scope.peopleList[i];
+            });
+          }
+      }
+
+      //婚否
+      if(response.maritalStatus!==undefined&&response.maritalStatus!==null)
+        $scope.maritalStatus=response.maritalStatus;
+
+      if(response.politicsList!==undefined&&response.politicsList!==null)
+      {
+        $scope.politicsList=response.politicsList;
+        if(response.politicsCode!==undefined&&response.politicsCode!==null)
+        {
+          $scope.politicsList.map(function(politics,i) {
+            if(politics.value==response.politicsCode)
+              $scope.politics=politics;
+          });
+        }
+      }
+
+      if(response.cardTypes!==undefined&&response.cardTypes!==null)
+      {
+        $scope.cardTypes=response.cardTypes;
+        $scope.cardTypes.map(function(cardType,i) {
+            if(cardType.label==response.cardType.label&&cardType.value==response.cardType.value)
+              $scope.cardType=$scope.cardTypes[i];
+        });
+      }
+
+
+      $scope.info_1= [
+        {id:"1",property:"姓名",val:$scope.user.perName,
+          type:'span'},
+        {id:"2",property:"英文姓名",val:$scope.user.perEnglishName,
+          type:'input'},
+        {id:"3",property:"证件类型",model:$scope.cardType,
+          vals:$scope.cardTypes,
+          type:'select',callback:'cardtype_func'},
+        {id:"4",property:"证件号码",val:$scope.user.perIdCard,type:'span'},
+        {id:"5",property:"学号",val:$scope.user.perNum,type:'span'},
+        {id:"6",property:"性别",val:$scope.user.genderCode,vals:['男','女'],type:'radio'},
+        {id:"7",property:"民族",model:$scope.people,
+          vals: $scope.peopleList,type:'select'},
+        {id:"8",property:"政治面貌",model:$scope.politics,
+          vals:$scope.politicsList
+          ,type:'select'}
+      ];
+    } else {
+    }
+
+  }).error(function (err) {
+    alert(err.toString());
+    $ionicLoading.show({
+      template: 'connect the server timeout',
+      duration: '2000'
+    });
+  })
+
+
 
 
     //{id:'3',property:'',val:'',arr:[],type:'selects'},及联数组列
@@ -56,14 +139,15 @@ angular.module('app')
     };
 
     $scope.go_back=function() {
-    }
+    };
 
 
     $scope.info_2=[
       {id:"1",property:"婚否",val:"否",vals:['是','否'],type:'radio'},
       {id:"2",property:"出生日期",val:"1990-10-15",type:'span'},
       {id:'3',property:'籍贯',arr:$scope.addresses,type:'selects',store:'regions'},
-      {id:"4",property:"国别",val:'中国',vals:['请选择','阿富汉','意大利','中国'],type:'select'},
+      {id:"4",property:"国别",val:'中国',
+        vals:[{label:'请选择',value:'请选择'},{label:'阿富汉',value:'阿富汉'},{label:'意大利',value:'意大利'},{label:'中国',value:'中国'}],type:'select'},
       {id:"5",property:"通讯地址",val:"交通局路政管理站",type:'input'},
       {id:"6",property:"邮编",val:'111111',type:'input'},
       {id:"7",property:"家庭地址",arr:$scope.addresses,type:'selects',store:'familyAddress'},
@@ -71,6 +155,19 @@ angular.module('app')
       {id:"9",property:"家庭邮编",val:'111111',type:'input'},
       {id:"10",property:"家庭电话",val:'111111',type:'input'}
     ];
+
+    $scope.type_change=function()
+    {
+      var info_1=$scope.info_1;
+
+      console.log('...');
+      console.log('...');
+    }
+
+    $scope.cardtype_func=function(){
+
+    }
+
 
     $scope.go_back=function(){
       window.history.back();
