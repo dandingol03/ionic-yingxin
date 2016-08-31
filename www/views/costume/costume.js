@@ -5,18 +5,43 @@ angular.module('app')
   .controller('costumeController',function($scope,$state,$http,$ionicLoading){
 
     $scope.title='军训服装';
-    $scope.costumeType = "2号三型";
-    $scope.Ttype = "S";
+    $scope.costumeType = null;
+    $scope.Ttype = null;
     $scope.shoes=null;
+    $scope.user={};
 
     $scope.ad=new Object();
+    $http({
+      method: "post",
+      params: {
+        personId:$rootScope.user.personId
+      },
+      url: "/proxy/node/tranningCloth/student_training_cloth_mobile.do"
+    }).success(function (response) {
+      var re = response.re;
+      if (re == 1) {
+        $scope.user= {
+          clothSize:response.clothSize,
+          shoeSize:response.shoeSize
+        }
+        $scope.shoes=$scope.user.shoeSize;
+        $scope.cloth=$scope.user.clothSize;
+      }
+
+    }).error(function (err) {
+      $ionicLoading.show({
+        template: 'connect the server timeout',
+        duration: '2000'
+      });
+    })
 
     $scope.upload = function() {
       $http({
         method: "post",
         url: "/proxy/node/tranningCloth/student_training_cloth_mobile.do"
       }).success(function (response) {
-        var data = response;
+
+
       }).error(function (err) {
         $ionicLoading.show({
           template: 'connect the server timeout',

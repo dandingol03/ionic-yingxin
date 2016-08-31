@@ -5,7 +5,7 @@
 
 
 angular.module('app')
-    .controller('loginController',function($scope,$state,$ionicLoading,$http,$cordovaProgress){
+    .controller('loginController',function($scope,$state,$ionicLoading,$http,$rootScope,$cordovaProgress){
 
     $scope.login = function(){
           $http({
@@ -14,12 +14,18 @@ angular.module('app')
                   loginName:$scope.user.username,
                   password:$scope.user.password
               },
-              url:"/proxy/node/login"
+              url:"/proxy/node/tranningCloth/mobileLogin.do"
           }).success(function(response){
             var re = response.re;
             if(re==1)
             {
-              $state.go('tabs.coverage');
+              //TODO:enter the dashboard panel
+              $state.go('tabs.dashboard');
+              var personId=response.personId;
+              $rootScope.user=
+              {
+                personId:personId
+              };
             }else{}
 
           }).error(function(err){
@@ -32,6 +38,9 @@ angular.module('app')
 
       }
 
+
+
+
     $scope.user=new Object();
     $scope.get_preference=function(){
       $cordovaPreferences.fetch('name')
@@ -43,36 +52,36 @@ angular.module('app')
         });
     };
 
-    $scope.login = function(){
-      $http({
-                method:"post",
-                params:{
-                    grant_type: 'password',
-                    username:$scope.user.username,
-                    password:$scope.user.password
-                },
-                url:"http://202.194.14.106:3000/login",
-               headers: {
-                'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
-                'Content-Type': 'application/x-www-form-urlencoded'
-               },
-
-            }).success(function(response){
-                var re=response.re;
-              if(re==1)
-              {
-                $state.go('tabs.coverage');
-              }else{
-
-              }
-            }).error(function(err){
-                alert(err.toSource());
-                $ionicLoading.show({
-                    template:'connect the server timeout',
-                    duration:'2000'
-                });
-            })
-        }
+    //$scope.login = function(){
+    //  $http({
+    //            method:"post",
+    //            params:{
+    //                grant_type: 'password',
+    //                username:$scope.user.username,
+    //                password:$scope.user.password
+    //            },
+    //            url:"/proxy/node/sduyingxinGetUserLoginJSONObjectMobile.do",
+    //           headers: {
+    //            'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
+    //            'Content-Type': 'application/x-www-form-urlencoded'
+    //           },
+    //
+    //        }).success(function(response){
+    //            var re=response.re;
+    //          if(re==1)
+    //          {
+    //            $state.go('tabs.coverage');
+    //          }else{
+    //
+    //          }
+    //        }).error(function(err){
+    //            alert(err.toSource());
+    //            $ionicLoading.show({
+    //                template:'connect the server timeout',
+    //                duration:'2000'
+    //            });
+    //        })
+    //    }
 
     $scope.update_op='option1';
     $scope.update_options=function(){
