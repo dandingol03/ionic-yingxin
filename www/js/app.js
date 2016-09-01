@@ -97,7 +97,7 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highc
       templateUrl:'views/login/login.html'
     });
 
-    $urlRouterProvider.otherwise('login');
+    $urlRouterProvider.otherwise('statistics');
 
   })
 

@@ -7,6 +7,7 @@ angular.module('app')
       window.history.back();
     }
 
+
     $scope.chartConfig = {
 
       options: {

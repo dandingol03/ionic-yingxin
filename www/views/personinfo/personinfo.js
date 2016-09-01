@@ -283,9 +283,34 @@ angular.module('app')
       console.log('...');
     }
 
-    $scope.personinfo_submit=function(){
+    $scope.personinfo_submit=function() {
+      var user = $scope.user;
 
-    }
+      //$http.post('/proxy/node/baseInfoManage/yx_StuBaseInfoUpdateInitMobile.do',
+      //  {
+      //    personId: $scope.user.personId,
+      //    perEnglishName:$scope.user.perEnglishName
+      //  }).success(function(response){
+      //
+      //  });
+
+      $http({
+        method: "post",
+        params: {
+          personId: $scope.user.personId,
+          perEnglishName:$scope.user.perEnglishName
+        },
+        url: "/proxy/node/tranningCloth/yx_StuBaseInfoUpdateMobile.do"
+      }).success(function (response) {
+        var re = response.re;
+        if (re == 1) {
+          console.log('success');
+        }
+      }).error(function (err) {
+        if (err)
+          alert(err.toString());
+      });
+    };
 
     $scope.go_back=function() {
     };
