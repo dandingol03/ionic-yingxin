@@ -53,11 +53,11 @@
                   <div class="col">
 
                     <label class="item item-input" ng-if="item.type=='input'" style="background: #f4f4f4;padding-left: 20px">
-                      <input type="text" ng-model="item.val"/>
+                      <input type="text" ng-model="user[item.val]" ng-change="perEnglishName_change()"/>
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
-                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.model" ng-options="type.label for type in item.vals" ng-change="type_change()">
+                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="user[item.model]" ng-options="type.label for type in item.vals" ng-change="type_change()">
                       </select>
                     </label>
 
@@ -87,7 +87,7 @@
             <ion-list>
               <ion-item ng-repeat="item in info_2">
                 <div class="row">
-                  <div class="col" ng-if="item.type!='selects'">
+                  <div class="col-40" ng-if="item.type!='selects'">
                     <p ng-if="item.type=='input'" style="margin-top:2%">
                       <i class="ion-record"></i>{{item.property}}
                     </p>
@@ -109,7 +109,7 @@
                   <div class="col">
 
                     <label class="item item-input" ng-if="item.type=='input'" style="background: #f4f4f4;padding-left: 20px">
-                      <input type="text" ng-model="item.val"/>
+                      <input type="text" ng-model="user[item.val]"/>
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
@@ -121,16 +121,16 @@
                     <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width: 120px;display: inline-block">
                        <select
                          style="padding-left:0px;right:auto;min-width:120px"
-                         ng-model="address[item.store].province"
-                         ng-options="add.province for add in addresses"
+                         ng-model="user[item.store].province"
+                         ng-options="pro.label for pro in item.arr"
                          ng-change="address_change()"></select>
                     </label>
 
                     <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width:120px;display: inline-block">
                       <select
                         style="padding-left:0px;right:auto;min-width:120px"
-                        ng-model="address[item.store].city"
-                        ng-options="item.city for item in address[item.store].province.sub"
+                        ng-model="user[item.store].city"
+                        ng-options="item.label for item in user[item.store].province.sub"
                         ng-change="address_change()"></select>
 
                     </label>
@@ -138,8 +138,8 @@
                     <label class="item item-select" ng-if="item.type=='selects'" style="height: 55px;width:120px;display: inline-block">
                       <select
                         style="padding-left:0px;right:auto;min-width:120px"
-                        ng-model="address[item.store].county"
-                        ng-options="item.county for item in address[item.store].city.sub"
+                        ng-model="user[item.store].county"
+                        ng-options="item.label for item in user[item.store].city.sub"
                         ng-change="address_change()"></select>
 
                     </label>
@@ -150,6 +150,7 @@
 
                     <p ng-if="item.type=='radio'">
                       <ion-radio ng-repeat="choice in item.vals"
+                                 name="item.val"
                                  ng-model="user[item.val]"
                                  ng-value="choice.value"
                                  ng-change="radio_change(choice)"
@@ -165,7 +166,7 @@
         </ion-slide-box>
 
 
-        <button class="button button-full button-positive" style="margin-top:40px" ng-click="submit()">
+        <button class="button button-full button-positive" style="margin-top:40px" ng-click="personinfo_submit()">
           提交更改
         </button>
       </div>
