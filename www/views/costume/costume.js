@@ -39,7 +39,12 @@ angular.module('app')
     $scope.upload = function() {
       $http({
         method: "post",
-        url: "/proxy/node/tranningCloth/studentTrainingClothWithPhone.do"
+        params:{
+          personId:$rootScope.user.personId,
+          shoeSize:$scope.shoes,
+          clothSize:$scope.Ttype
+        },
+        url: "/proxy/node/tranningCloth/student_training_cloth_submit_mobile.do"
       }).success(function (response) {
 
 
