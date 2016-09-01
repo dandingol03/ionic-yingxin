@@ -300,7 +300,7 @@ angular.module('app')
           personId: $scope.user.personId,
           perEnglishName:$scope.user.perEnglishName
         },
-        url: "/proxy/node/tranningCloth/yx_StuBaseInfoUpdateMobile.do"
+        url: "/proxy/node/baseInfoManage/yxNewStuinfo_personInfoUpdateMobile.do"
       }).success(function (response) {
         var re = response.re;
         if (re == 1) {
