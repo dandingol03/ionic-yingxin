@@ -21,12 +21,18 @@ angular.module('app')
       $scope.user= {
         perName:response.perName,
         perNum:response.perNum,
+        perAddress:response.perAddress,
         perIdCard:response.perIdCard,
         peopleId:response.peopleId,
         politicsCode:response.politicsCode,
         genderCode:response.genderCode,
         perEnglishName:response.perEnglishName,
-        cardType:response.cardType
+        cardType:response.cardType,
+        perPostalCode:response.perPostalCode,
+        famPostcalCode:response.famPostcalCode,
+        famTelephone:response.famTelephone,
+        familyAddressDetail:response.familyAddressDetail,
+        unitAddressDetail:response.unitAddressDetail
       };
 
       if(response.peopleList!==undefined&&response.peopleList!==null)
@@ -36,7 +42,7 @@ angular.module('app')
           {
             $scope.peopleList.map(function(people,i) {
               if(people.value==response.peopleId)
-                $scope.people=$scope.peopleList[i];
+                $scope.user.people=$scope.peopleList[i];
             });
           }
       }
@@ -48,7 +54,7 @@ angular.module('app')
         {
           $scope.politicsList.map(function(politics,i) {
             if(politics.value==response.politicsCode)
-              $scope.politics=politics;
+              $scope.user.politics=politics;
           });
         }
       }
@@ -58,7 +64,7 @@ angular.module('app')
         $scope.cardTypes=response.cardTypes;
         $scope.cardTypes.map(function(cardType,i) {
             if(cardType.label==response.cardType.label&&cardType.value==response.cardType.value)
-              $scope.cardType=$scope.cardTypes[i];
+              $scope.user.cardType=$scope.cardTypes[i];
         });
       }
 
@@ -69,18 +75,18 @@ angular.module('app')
       $scope.info_1= [
         {id:"1",property:"姓名",val:$scope.user.perName,
           type:'span'},
-        {id:"2",property:"英文姓名",val:$scope.user.perEnglishName,
+        {id:"2",property:"英文姓名",val:'perEnglishName',
           type:'input'},
-        {id:"3",property:"证件类型",model:$scope.cardType,
+        {id:"3",property:"证件类型",model:'cardType',
           vals:$scope.cardTypes,
           type:'select',callback:'cardtype_func'},
         {id:"4",property:"证件号码",val:$scope.user.perIdCard,type:'span'},
         {id:"5",property:"学号",val:$scope.user.perNum,type:'span'},
         {id:"6",property:"性别",val:'gender',vals:$scope.genderCodes,
           type:'radio'},
-        {id:"7",property:"民族",model:$scope.people,
+        {id:"7",property:"民族",model:'people',
           vals: $scope.peopleList,type:'select'},
-        {id:"8",property:"政治面貌",model:$scope.politics,
+        {id:"8",property:"政治面貌",model:'politics',
           vals:$scope.politicsList
           ,type:'select'}
       ];
@@ -107,22 +113,112 @@ angular.module('app')
       if(response.pros!==undefined&&response.pros!==null)
           $scope.pros=response.pros;
 
+      //籍贯
+      if(response.region!==undefined&&response.region!==null)
+      {
+          $scope.pros.map(function(pro,i) {
+            if(pro.label==response.region.province)
+            {
+              $scope.user.region={province:pro};
+              if(response.region.city!==undefined&&response.region.city!==null)//add selected city for region
+              {
+                pro.sub.map(function(city,j) {
+                    if(city.label==response.region.city)
+                    {
+                      $scope.user.region.city=city;
+                      if(response.region.town!==undefined&&response.region.town!==null&&response.region.town!='')
+                      {
+                          city.sub.map(function(town,k) {
+                              if(town.label==response.region.town)
+                                $scope.user.region.town=town;
+                          });
+                      }
+                    }
+                });
+              }
+            }
+          });
+      }
+
+      //家庭地址
+      if(response.familyAddress!==undefined&&response.familyAddress!==null)
+      {
+        $scope.pros.map(function(pro,i) {
+          if(pro.label==response.familyAddress.province)
+          {
+            $scope.user.familyAddress={province:pro};
+            if(response.familyAddress.city!==undefined&&response.familyAddress.city!==null)//add selected city for region
+            {
+              pro.sub.map(function(city,j) {
+                if(city.label==response.familyAddress.city)
+                {
+                  $scope.user.familyAddress.city=city;
+                  if(response.familyAddress.town!==undefined&&response.familyAddress.town!==null&&response.familyAddress.town!='')
+                  {
+                    city.sub.map(function(town,k) {
+                      if(town.label==response.familyAddress.town)
+                        $scope.user.familyAddress.town=town;
+                    });
+                  }
+                }
+              });
+            }
+          }
+        });
+      }
+
+      //工作地址
+      if(response.unitAddress!==undefined&&response.unitAddress!==null)
+      {
+        $scope.pros.map(function(pro,i) {
+          if(pro.label==response.unitAddress.province)
+          {
+            $scope.user.unitAddress={province:pro};
+            if(response.unitAddress.city!==undefined&&response.unitAddress.city!==null)//add selected city for region
+            {
+              pro.sub.map(function(city,j) {
+                if(city.label==response.unitAddress.city)
+                {
+                  $scope.user.unitAddress.city=city;
+                  if(response.unitAddress.town!==undefined&&response.unitAddress.town!==null&&response.unitAddress.town!='')
+                  {
+                    city.sub.map(function(town,k) {
+                      if(town.label==response.unitAddress.town)
+                        $scope.user.unitAddress.town=town;
+                    });
+                  }
+                }
+              });
+            }
+          }
+        });
+      }
+
+
       $scope.info_2=[
         {id:"1",property:"婚否",val:'maritalStatus',vals:$scope.maritalStatuses,type:'radio'},
         {id:"2",property:"出生日期",val:"1990-10-15",type:'span'},
-        {id:'3',property:'籍贯',arr:$scope.pros,store:'regions',
+        {id:'3',property:'籍贯',arr:$scope.pros,store:'region',
           type:'selects'},
         {id:"4",property:"国别",model:$scope.nation,
           vals:$scope.nationList,
           type:'select'},
-        {id:"5",property:"通讯地址",val:"交通局路政管理站",type:'input'},
-        {id:"6",property:"邮编",val:'111111',type:'input'},
-        {id:"7",property:"家庭地址",arr:$scope.addresses,store:'familyAddress',
+        {id:"5",property:"通讯地址",val:"perAddress",
+          type:'input'},
+        {id:"6",property:"邮编",val:'perPostalCode',
+          type:'input'},
+        {id:"7",property:"家庭地址",arr:$scope.pros,store:'familyAddress',
           type:'selects'},
-        {id:"8",property:"所在单位",arr:$scope.addresses,store:'unitAddress',
+        {id:"8",property:"家庭详细地址",val:'familyAddressDetail',
+          type:'input'},
+        {id:"9",property:"所在单位",arr:$scope.pros,store:'unitAddress',
           type:'selects'},
-        {id:"9",property:"家庭邮编",val:'111111',type:'input'},
-        {id:"10",property:"家庭电话",val:'111111',type:'input'}
+        {id:'10',property:'所在单位详细地址',val:'unitAddressDetail',
+          type:'input'},
+        {id:"10",property:"家庭邮编",val:'famPostcalCode',
+          type:'input'},
+        {id:"11",property:"家庭电话",val:'famTelephone',
+          type:'input'}
       ];
 
 
@@ -174,9 +270,22 @@ angular.module('app')
     $scope.address={};
 
     $scope.address_change=function(item){
-      var address=$scope.ob;
-
+      var regions=$scope.user.regions;
+      console.log('...');
+      console.log('...');
+      console.log('...');
     };
+
+    $scope.perEnglishName_change=function(){
+      var eng_name=$scope.user.perEnglishName;
+      console.log('...');
+      console.log('...');
+      console.log('...');
+    }
+
+    $scope.personinfo_submit=function(){
+
+    }
 
     $scope.go_back=function() {
     };
@@ -188,7 +297,6 @@ angular.module('app')
     $scope.type_change=function()
     {
       var info_1=$scope.info_1;
-
       console.log('...');
       console.log('...');
     }

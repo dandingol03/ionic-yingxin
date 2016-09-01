@@ -53,11 +53,11 @@
                   <div class="col">
 
                     <label class="item item-input" ng-if="item.type=='input'" style="background: #f4f4f4;padding-left: 20px">
-                      <input type="text" ng-model="item.val"/>
+                      <input type="text" ng-model="user[item.val]" ng-change="perEnglishName_change()"/>
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
-                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="item.model" ng-options="type.label for type in item.vals" ng-change="type_change()">
+                      <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="user[item.model]" ng-options="type.label for type in item.vals" ng-change="type_change()">
                       </select>
                     </label>
 
@@ -87,7 +87,7 @@
             <ion-list>
               <ion-item ng-repeat="item in info_2">
                 <div class="row">
-                  <div class="col" ng-if="item.type!='selects'">
+                  <div class="col-40" ng-if="item.type!='selects'">
                     <p ng-if="item.type=='input'" style="margin-top:2%">
                       <i class="ion-record"></i>{{item.property}}
                     </p>
@@ -109,7 +109,7 @@
                   <div class="col">
 
                     <label class="item item-input" ng-if="item.type=='input'" style="background: #f4f4f4;padding-left: 20px">
-                      <input type="text" ng-model="item.val"/>
+                      <input type="text" ng-model="user[item.val]"/>
                     </label>
 
                     <label class="item  item-select" ng-if="item.type=='select'" style="height: 55px;">
@@ -166,7 +166,7 @@
         </ion-slide-box>
 
 
-        <button class="button button-full button-positive" style="margin-top:40px" ng-click="submit()">
+        <button class="button button-full button-positive" style="margin-top:40px" ng-click="personinfo_submit()">
           提交更改
         </button>
       </div>
