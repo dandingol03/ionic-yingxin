@@ -11,7 +11,7 @@ angular.module('app')
         method:"post",
         params:{
         },
-        url:"/proxy/node/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
+        url:"http://202.194.14.181/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
       }).success(function(response){
         $ionicLoading.hide();
 
@@ -134,7 +134,7 @@ angular.module('app')
     $scope.update=function(){
       $scope.repaint();
     }
-    
+
     $scope.change=function () {
       //var college=$scope.statistics_modal.college;
       console.log('...');
