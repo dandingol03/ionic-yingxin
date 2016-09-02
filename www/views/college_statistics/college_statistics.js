@@ -29,9 +29,7 @@ angular.module('app')
                     text: $scope.collegeName
                 },
                 subtitle: {
-                    text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' :
-                        'Pinch the chart to zoom in'
+                    text: '点击图形上轮廓的点可以查看具体时刻的已到人数'
                 },
                 xAxis: {
                     type: 'datetime',

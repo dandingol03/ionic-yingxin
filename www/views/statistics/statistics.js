@@ -19,7 +19,17 @@ angular.module('app')
         var arrivals= response.arrivals;
         var notArrivals=response.notArrivals;
         $scope.colleges=colleges;
+        var default_flag=false;
+        $scope.colleges.map(function(college,i) {
+            if(!default_flag)
+            {
+              if(college=='全部')
+                default_flag=true;
+            }
+        });
 
+        if(default_flag==false)
+          $scope.colleges.splice(0, 0, '全部');
 
         /*** 单个学院按时间统计报道人数 ***/
         $ionicModal.fromTemplateUrl('views/modal/statistics_modal.html',{
@@ -27,6 +37,7 @@ angular.module('app')
           animation: 'slide-in-up'
         }).then(function(modal) {
           $scope.statistics_modal = modal;
+          $scope.statistics_modal.college=$scope.colleges[0];
         });
 
         $scope.openModal= function(){
