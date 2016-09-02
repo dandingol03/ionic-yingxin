@@ -136,6 +136,15 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highc
 
     });
 
+
+    $stateProvider.state('college_statistics',{
+      url:'/college_statistics/:collegeName',
+      controller: 'collegeStatisticsController',
+      templateUrl:'views/college_statistics/college_statistics.html'
+    });
+
+
+
     $stateProvider.state('login',{
       url:'/login',
       controller: 'loginController',
