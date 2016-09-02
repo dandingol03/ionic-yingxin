@@ -4,7 +4,7 @@
    "proxies": [
             {
               "path":"/proxy/node",
-              "proxyUrl":"http://192.168.1.102:8090/sduyingxin/"
+              "proxyUrl":"http://192.168.0.199:8090/sduyingxin/"
             }
           ]
 }

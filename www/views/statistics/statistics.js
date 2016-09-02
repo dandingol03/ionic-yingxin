@@ -11,7 +11,7 @@ angular.module('app')
         method:"post",
         params:{
         },
-        url:"http://202.194.14.181/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
+        url:"/proxy/node/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
       }).success(function(response){
         $ionicLoading.hide();
 
