@@ -145,10 +145,10 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highc
 
 
 
-    $stateProvider.state('login',{
-      url:'/login',
-      controller: 'loginController',
-      templateUrl:'views/login/login.html'
+    $stateProvider.state('foreignStu_statistics',{
+      url:'/foreignStu_statistics',
+      controller: 'foreignStu_statisticsController',
+      templateUrl:'views/foreignStu_statistics/foreignStu_statistics.html'
     });
 
     $urlRouterProvider.otherwise('statistics');
