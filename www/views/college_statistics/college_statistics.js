@@ -12,11 +12,8 @@ angular.module('app')
 
         $http({
             method: "post",
-            params:
-            {
-                collegeName:$scope.collegeName
-            },
-            url: "http://202.194.14.181/baseInfoManage/yxstatsticsCollegeDetailInfoMobile.do"
+            params: {collegeName:$scope.collegeName},
+            url: "/proxy/node/baseInfoManage/yxstatsticsCollegeDetailInfoMobile.do"
         }).success(function (response) {
 
             var arrivals=response.arrivals;
