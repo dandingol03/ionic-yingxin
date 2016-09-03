@@ -1,0 +1,25 @@
+<ion-modal-view class="wel_modal animated slideInDown ">
+    <ion-content scroll="false">
+        <div class="welcome_msg">
+      <span class="close_msg" ng-click="closeModal()">
+       <img src="img/close.png"/>
+      </span>
+            <h3>Search in colleges !</h3>
+            <p>
+                你可以选择某一个学院去查看具体的签到情况变化
+            </p>
+            <div class="placeholder" style="width:100%;height:60px;"></div>
+            <label class="item  item-select">
+                <select style="padding-left:0px;right:auto;min-width: 200px" ng-model="statistics_modal.college" ng-options="college for college in colleges" ng-change="change()">
+                </select>
+            </label>
+            <div class="placeholder" style="width:100%;height:60px;"></div>
+            <button class="button button-full button-positive"  style="width: 40%;display: inline-block" ng-click="confirm()">
+                确认
+            </button>
+            <button class="button button-full button-positive" style="width: 40%;display: inline-block" ng-click="closeModal()">
+                取消
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,20 @@
+<ion-view view-title="{{title}}">
+    <ion-nav-bar class="bar-stable" align-title="center" >
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear bar_arr" ng-click="go_back()">
+                <i class="ion-chevron-left"></i>
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear" ng-click="openModal()">
+                <i class="ion-ios-search-strong"></i>
+            </button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-content class="padding">
+        <ion-scroll zooming="true" direction="xy" style="width: 100%; height:550px">
+            <highchart id="chart2" config="chartConfig" style="height: 100%;"></highchart>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('statisticsController',function($scope,$state,$http,$ionicLoading){
+  .controller('statisticsController',function($scope,$state,$http,$ionicLoading,$ionicModal){
 
 
 
@@ -18,6 +18,39 @@ angular.module('app')
         var colleges=response.colleges;
         var arrivals= response.arrivals;
         var notArrivals=response.notArrivals;
+        $scope.colleges=colleges;
+        var default_flag=false;
+        $scope.colleges.map(function(college,i) {
+            if(!default_flag)
+            {
+              if(college=='全部')
+                default_flag=true;
+            }
+        });
+
+        if(default_flag==false)
+          $scope.colleges.splice(0, 0, '全部');
+
+        /*** 单个学院按时间统计报道人数 ***/
+        $ionicModal.fromTemplateUrl('views/modal/statistics_modal.html',{
+          scope:  $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.statistics_modal = modal;
+          $scope.statistics_modal.college=$scope.colleges[0];
+        });
+
+        $scope.openModal= function(){
+          $scope.statistics_modal.show();
+        };
+
+        $scope.closeModal= function() {
+          $scope.statistics_modal.hide();
+        };
+
+        /*** 单个学院按时间统计报道人数 ***/
+
+
 
         $scope.chartConfig = {
 
@@ -112,6 +145,18 @@ angular.module('app')
     $scope.update=function(){
       $scope.repaint();
     }
+
+    $scope.change=function () {
+      //var college=$scope.statistics_modal.college;
+      console.log('...');
+    }
+
+    $scope.confirm=function () {
+      $scope.closeModal();
+      $state.go('college_statistics',{collegeName:$scope.statistics_modal.college});
+
+    }
+
 
 
   });

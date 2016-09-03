@@ -6,7 +6,7 @@
       </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-      <button class="button button-icon button-clear" ng-click="goto('/#/tabs/dashboard')">
+      <button class="button button-icon button-clear" ng-click="openModal()">
         <i class="ion-ios-search-strong"></i>
       </button>
     </ion-nav-buttons>
@@ -18,8 +18,9 @@
     </ion-scroll>
     <div style="width:100%;height:100px;">
     </div>
-    <div class="bar bar-footer bar-balanced" >
-      <div class="title" ng-click="update()">刷新当前人数</div>
-    </div>
+
   </ion-content>
+  <div class="bar bar-footer bar-balanced" >
+    <div class="title" ng-click="update()">刷新当前人数</div>
+  </div>
 </ion-view>
