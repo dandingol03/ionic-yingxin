@@ -8,10 +8,10 @@ angular.module('app')
       //please wait....
       $ionicLoading.show({template:'正在拉取数据'});
       $http({
-        method:"post",
+        method:"get",
         params:{
         },
-        url:"http://202.194.14.181/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
+        url:"/proxy/node/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
       }).success(function(response){
         $ionicLoading.hide();
 

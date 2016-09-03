@@ -4,7 +4,11 @@
    "proxies": [
             {
               "path":"/proxy/node",
+
               "proxyUrl":"http://192.168.0.199:8090/lxsgl/"
+
+              "proxyUrl":"http://202.194.14.181/"
+
             }
           ]
 }
