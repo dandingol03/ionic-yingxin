@@ -11,25 +11,25 @@ angular.module('app')
         method:"get",
         params:{
         },
-        url:"/proxy/node/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
+        url:"http://202.194.14.98/baseInfoManage/yxstatisticsCollegesInfoMobile.do"
       }).success(function(response){
         $ionicLoading.hide();
 
         var colleges=response.colleges;
         var arrivals= response.arrivals;
-        var notArrivals=response.notArrivals;
+        var shouldArrivals=response.shouldArrivals;
         $scope.colleges=colleges;
-        var default_flag=false;
-        $scope.colleges.map(function(college,i) {
-            if(!default_flag)
-            {
-              if(college=='全部')
-                default_flag=true;
-            }
-        });
-
-        if(default_flag==false)
-          $scope.colleges.splice(0, 0, '全部');
+        //var default_flag=false;
+        //$scope.colleges.map(function(college,i) {
+        //    if(!default_flag)
+        //    {
+        //      if(college=='全部')
+        //        default_flag=true;
+        //    }
+        //});
+        //
+        //if(default_flag==false)
+        //  $scope.colleges.splice(0, 0, '全部');
 
         /*** 单个学院按时间统计报道人数 ***/
         $ionicModal.fromTemplateUrl('views/modal/statistics_modal.html',{
@@ -68,7 +68,7 @@ angular.module('app')
             enabled: false
           },
           //Series object (optional) - a list of series using normal Highcharts series options.
-          series: [arrivals ,notArrivals],
+          series: [arrivals ,shouldArrivals],
           //Title configuration (optional)
           title: {
             text: '各学院已报到情况'

@@ -151,6 +151,14 @@ angular.module('app',['ionic','ui.router','ngCordova', 'ionic-datepicker','highc
       templateUrl:'views/foreignStu_statistics/foreignStu_statistics.html'
     });
 
+    $stateProvider.state('stuType_foreignStu_statistics',{
+      url:'/stuType_foreignStu_statistics/:stuTypeCode/:stuType',
+      controller: 'stuType_foreignStu_statisticsController',
+      templateUrl:'views/stuType_foreignStu_statistics/stuType_foreignStu_statistics.html'
+    });
+
+
+
     $urlRouterProvider.otherwise('statistics');
 
   })
